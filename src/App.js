@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+// import { useState, useEffect } from 'react';
+// import { v4 as uuidv4 } from 'uuid';
 
 import ContactForm from './components/Form';
 
@@ -14,67 +14,64 @@ import Title from './components/Title';
 import { FormContainer } from './App.styles';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([]);
-  const [filter, setFilter] = useState('');
+  // const [contacts, setContacts] = useState([]);
+  // const [filter, setFilter] = useState('');
 
-  const addContact = (name, number) => {
-    if (
-      contacts.find(
-        contact => contact.name.toLowerCase() === name.toLowerCase(),
-      )
-    ) {
-      alert(`${name} is already in the contact list`);
-      return;
-    }
-    const contact = {
-      id: uuidv4(),
-      name,
-      number,
-    };
+  // const addContact = (name, number) => {
+  //   if (
+  //     contacts.find(
+  //       contact => contact.name.toLowerCase() === name.toLowerCase(),
+  //     )
+  //   ) {
+  //     alert(`${name} is already in the contact list`);
+  //     return;
+  //   }
+  //   const contact = {
+  //     id: uuidv4(),
+  //     name,
+  //     number,
+  //   };
 
-    setContacts(contacts => [contact, ...contacts]);
-  };
+  //   setContacts(contacts => [contact, ...contacts]);
+  // };
 
-  useEffect(() => {
-    const savedContacts = localStorage.getItem('contacts');
+  // useEffect(() => {
+  //   const savedContacts = localStorage.getItem('contacts');
 
-    const parsedContacts = JSON.parse(savedContacts);
+  //   const parsedContacts = JSON.parse(savedContacts);
 
-    if (parsedContacts) {
-      setContacts(parsedContacts);
-    }
-  }, []);
+  //   if (parsedContacts) {
+  //     setContacts(parsedContacts);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts]);
 
-  const deleteContact = contactId => {
-    setContacts(contacts.filter(contact => contact.id !== contactId));
-  };
+  // const deleteContact = contactId => {
+  //   setContacts(contacts.filter(contact => contact.id !== contactId));
+  // };
 
-  const changeFilter = e => {
-    setFilter(e.currentTarget.value);
-  };
+  // const changeFilter = e => {
+  //   setFilter(e.currentTarget.value);
+  // };
 
-  const getVisibleContacts = () => {
-    const normalizedFilter = filter.toLowerCase();
+  // const getVisibleContacts = () => {
+  //   const normalizedFilter = filter.toLowerCase();
 
-    return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(normalizedFilter),
-    );
-  };
+  //   return contacts.filter(contact =>
+  //     contact.name.toLowerCase().includes(normalizedFilter),
+  //   );
+  // };
 
   return (
     <FormContainer>
       <Title text={'Phonebook'} />
-      <ContactForm onSubmit={addContact} />
+      <ContactForm />
       <Title text={'Contacts'} />
-      <Filter value={filter} onChange={changeFilter} />
-      <ContactList
-        contacts={getVisibleContacts()}
-        onDeleteContact={deleteContact}
-      />
+      <Filter />
+      <ContactList />
     </FormContainer>
   );
 };

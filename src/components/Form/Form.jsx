@@ -1,7 +1,12 @@
 import { useState } from 'react';
+
 import PropTypes from 'prop-types';
 
+import { connect } from 'react-redux';
+
 import { CgUserAdd } from 'react-icons/cg';
+
+import { addContact } from '../../redux/actions/contacts';
 
 import { Form, Label, Input, Button } from './Form.styles';
 
@@ -72,7 +77,11 @@ export const ContactForm = ({ onSubmit }) => {
   );
 };
 
-export default ContactForm;
+const mapDispatchToProps = dispatch => ({
+  onSubmit: (name, number) => dispatch(addContact(name, number)),
+});
+
+export default connect(null, mapDispatchToProps)(ContactForm);
 
 // export default class ContactForm extends Component {
 //   state = {
