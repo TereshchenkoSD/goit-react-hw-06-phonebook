@@ -1,33 +1,45 @@
-import { ADD_CONTACT, DELETE_CONTACT, CHANGE_FILTER } from '../types';
+import { createReducer } from '@reduxjs/toolkit';
 
-const contactsInitialState = [];
+import { addContact, deleteContact, changeFilter } from '../actions/contacts';
 
-export const contactsReducer = (
-  state = contactsInitialState,
-  { type, payload },
-) => {
-  switch (type) {
-    case ADD_CONTACT:
-      return [...state, payload];
+export const contactsReducer = createReducer([], {
+  [addContact]: (state, { payload }) => [...state, payload],
+  [deleteContact]: (state, { payload }) =>
+    state.filter(contact => contact.id !== payload),
+});
 
-    case DELETE_CONTACT:
-      return state.filter(contact => contact.id !== payload);
+// const contactsInitialState = [];
 
-    default:
-      return state;
-  }
-};
+// export const contactsReducer = (
+//   state = contactsInitialState,
+//   { type, payload },
+// ) => {
+//   switch (type) {
+//     case ADD_CONTACT:
+//       return [...state, payload];
 
-const filterInitialState = '';
+//     case DELETE_CONTACT:
+//       return state.filter(contact => contact.id !== payload);
 
-export const filterReducer = (
-  state = filterInitialState,
-  { type, payload },
-) => {
-  switch (type) {
-    case CHANGE_FILTER:
-      return payload;
-    default:
-      return state;
-  }
-};
+//     default:
+//       return state;
+//   }
+// };
+
+export const filterReducer = createReducer('', {
+  [changeFilter]: (_, { payload }) => payload,
+});
+
+// const filterInitialState = '';
+
+// export const filterReducer = (
+//   state = filterInitialState,
+//   { type, payload },
+// ) => {
+//   switch (type) {
+//     case CHANGE_FILTER:
+//       return payload;
+//     default:
+//       return state;
+//   }
+// };
