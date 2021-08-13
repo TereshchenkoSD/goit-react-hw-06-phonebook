@@ -16,11 +16,10 @@ import { rootReducer } from '../reducers';
 const persistConfig = {
   key: 'contacts',
   storage,
+  blacklist: ['filter'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-// const store = createStore(persistedReducer, devToolsEnhancer());
 
 const store = configureStore({
   reducer: persistedReducer,
